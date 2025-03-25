@@ -27,7 +27,7 @@ export class UserService {
 
   async updateUser(id: string, update: UpdateUserDto): Promise<User | null> {
     if (!update || Object.keys(update).length === 0) {
-        throw new Error("No update data provided");
+      throw new Error('No update data provided');
     }
     const updatedUser = await this.userModel.findByIdAndUpdate(
       id,
@@ -36,8 +36,8 @@ export class UserService {
         new: true,
         runValidators: true,
         strict: false,
-      }
-    )
+      },
+    );
     return updatedUser;
-}
+  }
 }

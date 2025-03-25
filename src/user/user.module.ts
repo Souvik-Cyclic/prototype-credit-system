@@ -4,11 +4,13 @@ import { User, UserSchema } from './schema/user.model';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { JwtModule } from 'src/jwt/jwt.module';
+import { AdminModule } from 'src/admin/admin.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     JwtModule,
+    AdminModule,
   ],
   controllers: [UserController],
   providers: [UserService],

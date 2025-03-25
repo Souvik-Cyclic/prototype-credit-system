@@ -20,6 +20,7 @@ import { AuthGuard } from 'src/auth/auth.guard';
 import { Response } from 'express';
 import { errorHandler, OK } from 'src/response/response.util';
 import { UpdateUserDto } from './dto/user.dto';
+import { AdminAuthGuard } from 'src/admin/admin-auth.guard';
 
 @ApiTags('User')
 @Controller('user')
@@ -30,7 +31,7 @@ export class UserController {
   @ApiOperation({ summary: 'Get all users', description: 'Get all users' })
   @ApiResponse({ status: 200, description: 'Return all users' })
   @ApiBearerAuth()
-  @UseGuards(AuthGuard)
+  @UseGuards(AdminAuthGuard)
   async getAllUsers(@Res() res: Response) {
     try {
       const data = await this.userService.getAllUsers();
@@ -70,22 +71,18 @@ export class UserController {
     }
   }
 
-    @Patch('')
-    @ApiOperation({ summary: 'Update user', description: 'Update user' })
-    @ApiResponse({ status: 200, description: 'User Updated' })
-    @ApiBearerAuth()
-    @UseGuards(AuthGuard)
-    async update(
-        @Res() res: Response,
-        @Req() req,
-        @Body() body: UpdateUserDto,
-    ){
-        try {
-            const id = req.user;
-            const data = await this.userService.updateUser(id, body);
-            return OK(res, 'User Updated', data, HttpStatus.OK);
-        } catch (error) {
-            return errorHandler(error, res);
-        }
+  @Patch('')
+  @ApiOperation({ summary: 'Update user', description: 'Update user' })
+  @ApiResponse({ status: 200, description: 'User Updated' })
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
+  async update(@Res() res: Response, @Req() req, @Body() body: UpdateUserDto) {
+    try {
+      const id = req.user;
+      const data = await this.userService.updateUser(id, body);
+      return OK(res, 'User Updated', data, HttpStatus.OK);
+    } catch (error) {
+      return errorHandler(error, res);
     }
+  }
 }
