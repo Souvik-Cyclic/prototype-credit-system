@@ -13,7 +13,7 @@ import {
 import {
   Transaction,
   TransactionSchema,
-} from 'src/credits/transactions/schema/transaction.model';
+} from 'src/credits/transaction/schema/transaction.model';
 
 @Module({
   imports: [

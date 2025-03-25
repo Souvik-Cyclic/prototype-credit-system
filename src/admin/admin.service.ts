@@ -14,7 +14,7 @@ import {
 import {
   Transaction,
   TransactionDocument,
-} from 'src/credits/transactions/schema/transaction.model';
+} from 'src/credits/transaction/schema/transaction.model';
 
 @Injectable()
 export class AdminService {
