@@ -7,6 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
+import { CreditsModule } from './credits/credits.module';
 
 @Module({
   imports: [
@@ -16,9 +17,10 @@ import { AdminModule } from './admin/admin.module';
     }),
     MongooseModule.forRoot(`${process.env.MONGO_URI}`),
     JwtModule,
+    AdminModule,
     UserModule,
     AuthModule,
-    AdminModule,
+    CreditsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
