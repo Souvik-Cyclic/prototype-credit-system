@@ -53,55 +53,55 @@ export class CreateCreditPackDto {
 }
 
 export class UpdateCreditPackDto {
-    @ApiProperty({
-        description: 'Updated Name of the Credit Pack',
-        example: 'Enterprise',
-        type: String,
-        required: false,
-    })
-    @IsOptional()
-    @IsString()
-    name?: string;
+  @ApiProperty({
+    description: 'Updated Name of the Credit Pack',
+    example: 'Enterprise',
+    type: String,
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  name?: string;
 
-    @ApiProperty({
-        description: 'Updated Description of the Credit Pack',
-        example: 'Enterprise Credit Pack: Perfect for businesses',
-        type: String,
-        required: false,
-    })
-    @IsOptional()
-    @IsString()
-    description?: string;
+  @ApiProperty({
+    description: 'Updated Description of the Credit Pack',
+    example: 'Enterprise Credit Pack: Perfect for businesses',
+    type: String,
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  description?: string;
 
-    @ApiProperty({
-        description: 'Updated Amount of Credit',
-        example: 500,
-        type: Number,
-        required: false,
-    })
-    @IsOptional()
-    @IsNumber()
-    @IsPositive()
-    credit_amount?: number;
+  @ApiProperty({
+    description: 'Updated Amount of Credit',
+    example: 500,
+    type: Number,
+    required: false,
+  })
+  @IsOptional()
+  @IsNumber()
+  @IsPositive()
+  credit_amount?: number;
 
-    @ApiProperty({
-        description: 'Updated Price of the Credit Pack',
-        example: 1000,
-        type: Number,
-        required: false,
-    })
-    @IsOptional()
-    @IsNumber()
-    @IsPositive()
-    price?: number;
+  @ApiProperty({
+    description: 'Updated Price of the Credit Pack',
+    example: 1000,
+    type: Number,
+    required: false,
+  })
+  @IsOptional()
+  @IsNumber()
+  @IsPositive()
+  price?: number;
 
-    @ApiProperty({
-        description: 'Updated Status of the Credit Pack',
-        example: true,
-        type: Boolean,
-        required: false,
-    })
-    @IsOptional()
-    @IsBoolean()
-    is_active?: boolean;
+  @ApiProperty({
+    description: 'Updated Status of the Credit Pack',
+    example: true,
+    type: Boolean,
+    required: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  is_active?: boolean;
 }
