@@ -16,7 +16,9 @@ async function bootstrap() {
   SwaggerModule.setup('api/docs', app, document);
 
   await app.listen(process.env.PORT ?? 3000);
-  console.log("Server is running on http://localhost:3000");
-  console.log("API Documentation is available at http://localhost:3000/api/docs");
+  console.log('Server is running on http://localhost:3000');
+  console.log(
+    'API Documentation is available at http://localhost:3000/api/docs',
+  );
 }
 bootstrap();
