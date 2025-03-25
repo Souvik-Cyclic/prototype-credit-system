@@ -81,4 +81,49 @@ export class AdminService {
       throw error;
     }
   }
+
+  async checkUserCredits(email: string) {
+    const user = await this.userModel.findOne({ email });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    const creditBalance = await this.creditBalanceModel.findOneAndUpdate(
+      { user: user._id },
+      { $setOnInsert: { current_credits: 0 } },
+      { new: true, upsert: true },
+    );
+    return creditBalance.current_credits;
+  }
+
+  async modifyCredits(email: string, newCredits: number) {
+    const session = await this.connection.startSession();
+    session.startTransaction();
+    try {
+      const user = await this.userModel.findOne({ email }).session(session);
+      if (!user) {
+        throw new NotFoundException('User not found');
+      }
+      const previousBalance = await this.creditBalanceModel
+        .findOne({ user: user._id })
+        .session(session);
+      const updatedCredit = await this.creditBalanceModel.findOneAndUpdate(
+        { user: user._id },
+        { $set: { current_credits: newCredits } },
+        { new: true, upsert: true, session },
+      );
+      const transaction = new this.transactionModel({
+        user: user._id,
+        credit_change: newCredits - (previousBalance?.current_credits || 0),
+        transaction_type: previousBalance ? 'modified' : 'purchase',
+      });
+      await transaction.save({ session });
+      await session.commitTransaction();
+      session.endSession();
+      return { email, new_balance: updatedCredit.current_credits };
+    } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+      throw error;
+    }
+  }
 }

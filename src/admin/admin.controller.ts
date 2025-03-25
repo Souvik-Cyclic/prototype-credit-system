@@ -4,9 +4,9 @@ import {
   Res,
   Body,
   HttpStatus,
-  UnauthorizedException,
   Get,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -17,7 +17,11 @@ import {
 import { Response } from 'express';
 import { OK, errorHandler } from 'src/response/response.util';
 import { AdminAuthGuard } from './admin-auth.guard';
-import { AddCreditsDto, AdminLoginDto } from './dto/admin.dto';
+import {
+  AddCreditsDto,
+  AdminLoginDto,
+  ModifyCreditsDto,
+} from './dto/admin.dto';
 import { AdminService } from './admin.service';
 
 @ApiTags('Admin')
@@ -71,6 +75,45 @@ export class AdminController {
         body.credits,
       );
       return OK(res, 'Credits Added Successfully', result, HttpStatus.OK);
+    } catch (error) {
+      return errorHandler(error, res);
+    }
+  }
+
+  @Get('check-credits')
+  @ApiOperation({ summary: 'Check Credits of a User' })
+  @ApiResponse({
+    status: 200,
+    description: 'User Credits Retrieved Successfully',
+  })
+  @ApiBearerAuth()
+  @UseGuards(AdminAuthGuard)
+  async checkCredits(@Res() res: Response, @Query('email') email: string) {
+    try {
+      const data = await this.adminService.checkUserCredits(email);
+      return OK(
+        res,
+        'User Credits Retrieved Successfully',
+        { email, current_credits: data },
+        HttpStatus.OK,
+      );
+    } catch (error) {
+      return errorHandler(error, res);
+    }
+  }
+
+  @Post('modify-credits')
+  @ApiOperation({ summary: 'Modify Credits of a User' })
+  @ApiResponse({ status: 200, description: 'Credits Modified Successfully' })
+  @ApiBearerAuth()
+  @UseGuards(AdminAuthGuard)
+  async modifyCredits(@Res() res: Response, @Body() body: ModifyCreditsDto) {
+    try {
+      const data = await this.adminService.modifyCredits(
+        body.email,
+        body.newCredits,
+      );
+      return OK(res, 'Credits Modified Successfully', data, HttpStatus.OK);
     } catch (error) {
       return errorHandler(error, res);
     }

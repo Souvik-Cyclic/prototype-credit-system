@@ -11,7 +11,10 @@ export class Transaction {
   @Prop({ required: true, type: Number })
   credit_change: number;
 
-  @Prop({ required: true, enum: ['purchase', 'usage', 'refund', 'gift'] })
+  @Prop({
+    required: true,
+    enum: ['purchase', 'usage', 'refund', 'gift', 'modified'],
+  })
   transaction_type: string;
 
   @Prop()

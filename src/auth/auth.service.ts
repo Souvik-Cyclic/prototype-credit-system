@@ -4,12 +4,18 @@ import { Model } from 'mongoose';
 import { JwtService } from 'src/jwt/jwt.service';
 import { User, UserDocument } from 'src/user/schema/user.model';
 import { AuthDto } from './dto/auth.dto';
+import {
+  CreditBalance,
+  CreditBalanceDocument,
+} from 'src/credits/schema/credit-balance.model';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel(User.name)
     private readonly userModel: Model<UserDocument>,
+    @InjectModel(CreditBalance.name)
+    private readonly creditBalanceModel: Model<CreditBalanceDocument>,
     private jwtService: JwtService,
   ) {}
 
@@ -20,6 +26,7 @@ export class AuthService {
     }
     const newuser = new this.userModel(singup);
     await newuser.save();
+    await this.creditBalanceModel.create({ user: newuser._id, balance: 0 });
     if (!newuser) {
       throw new HttpException('Signup failed', 400);
     }

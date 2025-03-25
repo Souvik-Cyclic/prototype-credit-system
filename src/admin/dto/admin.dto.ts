@@ -29,3 +29,12 @@ export class AddCreditsDto {
   @Min(1, { message: 'Credits must be greater than 0' })
   credits: number;
 }
+
+export class ModifyCreditsDto {
+  @ApiProperty({ example: 'souvik.cyc@gmail.com', description: 'User Email' })
+  @IsEmail({}, { message: 'Invalid Email Format' })
+  email: string;
+
+  @ApiProperty({ example: 100, description: 'Number of Credits' })
+  newCredits: number;
+}
