@@ -7,7 +7,12 @@ import { CreditBalanceModule } from './credit-balance/credit-balance.module';
 import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
-  imports: [CreditPackModule, PricingModule, CreditBalanceModule, TransactionModule],
+  imports: [
+    CreditPackModule,
+    PricingModule,
+    CreditBalanceModule,
+    TransactionModule,
+  ],
   controllers: [CreditsController],
   providers: [CreditsService],
 })

@@ -10,6 +10,12 @@ import { RegistrationModule } from './registration/registration.module';
 @Module({
   controllers: [EventsController],
   providers: [EventsService],
-  imports: [PhotoboothModule, WallModule, GameModule, AiBotModule, RegistrationModule],
+  imports: [
+    PhotoboothModule,
+    WallModule,
+    GameModule,
+    AiBotModule,
+    RegistrationModule,
+  ],
 })
 export class EventsModule {}
