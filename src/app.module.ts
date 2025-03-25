@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
 import { CreditsModule } from './credits/credits.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { CreditsModule } from './credits/credits.module';
     UserModule,
     AuthModule,
     CreditsModule,
+    EventsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

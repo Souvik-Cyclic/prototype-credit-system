@@ -10,11 +10,11 @@ import { User, UserDocument } from 'src/user/schema/user.model';
 import {
   CreditBalance,
   CreditBalanceDocument,
-} from 'src/credits/schema/credit-balance.model';
+} from 'src/credits/credit-balance/schema/credit-balance.model';
 import {
   Transaction,
   TransactionDocument,
-} from 'src/credits/schema/transaction.model';
+} from 'src/credits/transactions/schema/transaction.model';
 
 @Injectable()
 export class AdminService {

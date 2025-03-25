@@ -7,7 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import {
   CreditBalance,
   CreditBalanceSchema,
-} from 'src/credits/schema/credit-balance.model';
+} from 'src/credits/credit-balance/schema/credit-balance.model';
 
 @Module({
   imports: [

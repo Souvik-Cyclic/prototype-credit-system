@@ -7,7 +7,7 @@ import { AuthDto } from './dto/auth.dto';
 import {
   CreditBalance,
   CreditBalanceDocument,
-} from 'src/credits/schema/credit-balance.model';
+} from 'src/credits/credit-balance/schema/credit-balance.model';
 
 @Injectable()
 export class AuthService {
