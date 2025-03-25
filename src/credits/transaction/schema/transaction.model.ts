@@ -18,7 +18,13 @@ export class Transaction {
   transaction_type: string;
 
   @Prop()
+  event_type?: string;
+
+  @Prop()
   event_id?: string;
+
+  @Prop()
+  event_name?: string;
 }
 
 export const TransactionSchema = SchemaFactory.createForClass(Transaction);
