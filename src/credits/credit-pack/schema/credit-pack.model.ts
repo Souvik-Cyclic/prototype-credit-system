@@ -17,7 +17,7 @@ export class CreditPack {
   @Prop({ required: true, type: Number })
   price: number;
 
-  @Prop({ default: false })
+  @Prop()
   is_active: boolean;
 }
 
