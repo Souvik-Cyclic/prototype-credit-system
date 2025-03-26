@@ -8,6 +8,7 @@ import {
   CreditBalance,
   CreditBalanceSchema,
 } from 'src/credits/credit-balance/schema/credit-balance.model';
+import { AuthGuard } from './auth.guard';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import {
     ]),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
+  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}
