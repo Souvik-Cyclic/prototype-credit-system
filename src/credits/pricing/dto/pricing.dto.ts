@@ -3,7 +3,7 @@ import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreatePricingDto {
   @ApiProperty({
-    example: 'AI-Photobooth',
+    example: 'ai-photobooth',
     description: 'The name of the event type',
   })
   @IsString()
@@ -30,7 +30,7 @@ export class CreatePricingDto {
 
 export class UpdatePricingDto {
   @ApiProperty({
-    example: 'AI-Photobooth',
+    example: 'ai-photobooth',
     description: 'The name of the event type',
     required: false,
   })

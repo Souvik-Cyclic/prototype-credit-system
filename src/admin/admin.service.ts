@@ -134,7 +134,7 @@ export class AdminService {
     }
     const transaction = await this.transactionModel
       .find({ user: user._id })
-      .sort({ created_at: -1 })
+      .sort({ createdAt: -1 })
       .lean();
     if (!transaction || transaction.length === 0) {
       return [];
