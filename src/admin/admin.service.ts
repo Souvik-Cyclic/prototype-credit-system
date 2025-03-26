@@ -126,4 +126,16 @@ export class AdminService {
       throw error;
     }
   }
+
+  async getUserCreditHistory(email: string){
+    const user = await this.userModel.findOne({ email });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    const transaction = await this.transactionModel.find({ user: user._id }).sort({ created_at: -1 }).lean();
+    if (!transaction || transaction.length === 0) {
+      return [];
+    }
+    return transaction;
+  }
 }

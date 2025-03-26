@@ -118,4 +118,27 @@ export class AdminController {
       return errorHandler(error, res);
     }
   }
+
+  @Get('check-credit-history')
+  @ApiOperation({ summary: 'Check Credit History of a User' })
+  @ApiResponse({
+    status: 200,
+    description: 'User Credit History Retrieved Successfully',
+  })
+  async getUserCreditHistory(
+    @Res() res: Response,
+    @Query('email') email: string,
+  ) {
+    try {
+      const data = await this.adminService.getUserCreditHistory(email);
+      return OK(
+        res,
+        'User Credit History Retrieved Successfully',
+        data,
+        HttpStatus.OK,
+      );
+    } catch (error) {
+      return errorHandler(error, res);
+    }
+  }
 }
